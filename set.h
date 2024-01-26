@@ -1,7 +1,14 @@
-#include <iostream>
-3include <string>
 
+#include <iostream>
+#include <string>
+#include <chrono>
 using namespace std;
+
+#ifndef SET_H
+#define SET_H
+
+
+
 
 template <class T>
 class Set
@@ -20,7 +27,7 @@ public:
                         Set             (const Set<T> &s);
                         ~Set            (void);
                         
-        string          to_string       (void) const;
+	string          to_string       (void) const;
 
         void            insert          (const T& value);
         void            remove          (const T& value);
@@ -32,27 +39,23 @@ public:
         bool            operator<=      (const Set<T> &s);
         Set<T>          operator+       (const Set<T> &s);
         Set<T>          operator&       (const Set<T> &s);
-        Set<T>          operator-       (const Set<T> &s);
+	Set<T>          operator-       (const Set<T> &s);
 
-friend ostream & operator<< (ostream &os, const Set<T> &myset) 
-{
-    Node *ptr = myset.head;
-    os << "[ ";
-    while (ptr != nullptr) {
-        if (ptr->next != nullptr)
-            os << ptr->data << ", ";
-        else
-            os << ptr->data << " ";
-        ptr = ptr->next;
-    }
-    os << "]";
-    return os;
-}
-
-
+	friend std::ostream &operator<<(std::ostream &os, const Set<T> &myset) 
+	{
+		Node *ptr = myset.head;
+		os << "[ ";
+		while (ptr != nullptr) 
+		{
+			if (ptr->next != nullptr)
+		        os << ptr->data << ", ";
+		    	else
+		        os << ptr->data << " ";
+		    	ptr = ptr->next;
+		}
+		os << "]";
+		return os;
+	}
 };
-
-
-#include "List.cpp"
-
-#endif
+// #include "set.cpp"
+#endif 
