@@ -1,5 +1,6 @@
 #include "set.h"
 #include <string>
+#include <sstream>
 using namespace std;
 
 //========================================================
@@ -167,7 +168,7 @@ bool		Set<T>::empty		( void ) const
 
 //==============================================================
 // contains
-// Returns whether an element x is contained in the set s.
+// Returns weather an element x is contained in the set s.
 // Parameters: None
 // Return Value: bool value
 //==============================================================
@@ -233,7 +234,6 @@ bool		Set<T>::operator==	( const Set<T> &s )
 //==============================================================
 
 template <class T>
-template <class T>
 bool		Set<T>::operator<=	( const Set<T> &s )
 {
 	if (this->cardinality() > s.cardinality())
@@ -298,7 +298,6 @@ Set<T>		Set<T>::operator+	(const Set<T> &s)
 //==============================================================
 
 template <class T>
-template <class T>
 Set<T>		Set<T>::operator&	(const Set<T> &s) 
 {
     Set<T> intersecSet;
@@ -345,6 +344,7 @@ Set<T>		Set<T>::operator-		(const Set<T> &s)
 
     return difSet;
 }
+
 //==============================================================
 // to_string
 // Converts the elements of the set into a string representation.
@@ -356,17 +356,19 @@ Set<T>		Set<T>::operator-		(const Set<T> &s)
 template<class T>
 string Set<T>::to_string() const 
 {
-    string result = "";
-    Node* current = head;
-    while (current != nullptr) {
-        result += std::to_string(current->data);
-        if (current->next != nullptr) {
-            result += " ";
-        }
-        current = current->next;
+    stringstream result;
+    Node *cur = head;
+    while (cur != NULL) 
+    {
+        if (cur->next)
+        	result << cur-> data << " ";
+        else
+        	result << cur->data;
+        cur = cur->next;
+
     }
-    result += "";
-    return result;
+
+    return result.str();
 }
 
 
