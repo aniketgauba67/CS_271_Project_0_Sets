@@ -105,7 +105,7 @@ void		Set<T>::remove		( const T &value )
 		return;
 	}
 	
-	if ( head->data == value)
+	if ( head->data == value )
 	{
 	Node *temp = head;
 	head = head->next;
@@ -163,7 +163,7 @@ bool		Set<T>::empty		( void ) const
 
 //==============================================================
 // contains
-// Returns whwther an element x is contained in the set s.
+// Returns weather an element x is contained in the set s.
 // Parameters: None
 // Return Value: bool value
 //==============================================================
@@ -186,7 +186,7 @@ bool		Set<T>::contain	( const T &value ) const
 
 //==============================================================
 // operator== 
-//
+// 
 //
 //
 //==============================================================
@@ -238,8 +238,106 @@ bool		Set<T>::operator<=	( const set<T> &s )
 	return true;
 }
 
+//==============================================================
+// operator+
+//
+//
+//
+//==============================================================
 
+template <class T>
+Set<T>		Set<T>::operator+	(const Set<T> &s) 
+{
+    Set<T> uniSet;
 
+    Node* cur = s.head;
+    while (cur != NULL) 
+    {
+        uniSet.insert(cur->data);
+        cur = cur->next;
+    }
+
+    cur = head;
+    while (cur != NULL) 
+    {
+        uniSet.insert(cur->data);
+        cur = cur->next;
+    }
+
+    return uniSet;
+}
+
+//==============================================================
+// operator&
+//
+//
+//
+//==============================================================
+template <class T>
+Set<T>		Set<T>::operator&	(const Set<T> &s) 
+{
+    Set<T> intersecSet;
+
+    Node* cur = head;
+    while (cur != NULL) 
+    {
+        if (s.contains(cur->data)) 
+        {
+        
+            intersecSet.insert(cur->data);
+        }
+        cur = cur->next;
+    }
+
+    return intersecSet;
+}
+
+//==============================================================
+// operator+
+//
+//
+//
+//==============================================================
+template <class T>
+Set<T>		Set<T>::operator-	(const Set<T> &s)
+{
+    Set<T> difSet;
+
+    Node* cur = head;
+    while (cur != NULL) 
+    {
+        if (!.contains(cur->data)) 
+        {
+            difSet.insert(cur->data);
+        }
+        cur = cur->next;
+    }
+
+    return difSet;
+}
+//==============================================================
+// to_string
+//
+//
+//
+//==============================================================
+template <class T>
+string		 Set<T>::to_string	( void ) const 
+{
+    string res;
+    Node* cur = head;
+
+    while (cur != NULL) 
+    {
+        result += to_string(cur->data); 
+        if (cur->next != NULL) 
+        {
+            res += " "; 
+        }
+        cur = cur->next;
+    }
+    return res;
+}
 
 
 
