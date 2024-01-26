@@ -1,3 +1,7 @@
+#include "set.h"
+#include <string>
+using namespace std;
+
 //========================================================
 // Set
 // Default constructor creating an empty set.
@@ -68,7 +72,7 @@ template <class T>
 //==============================================================
 // insert
 // Adds a new Elements at the head of the list.
-// Parameters: T item (item to be added)
+// Parameters: T  item(item to be added)
 // Return Value: None
 //==============================================================
 
@@ -122,7 +126,7 @@ void		Set<T>::remove		( const T &value )
 	if (cur->next != NULL)
 	{
 	Node *temp = cur->next;
-	cur->next = cur->next->next
+	cur->next = cur->next->next;
 	delete temp;
 	}
 }
@@ -158,24 +162,24 @@ int		Set<T>::cardinality	( void ) const
 template <class T>
 bool		Set<T>::empty		( void ) const
 {
-	return ( head = NULL );
+	return ( head == NULL );
 }
 
 //==============================================================
 // contains
-// Returns weather an element x is contained in the set s.
+// Returns whether an element x is contained in the set s.
 // Parameters: None
 // Return Value: bool value
 //==============================================================
 
 template <class T>
-bool		Set<T>::contain	( const T &value ) const
+bool		Set<T>::contains	( const T &value ) const
 {
 	Node *cur = head;
 	
 	while (cur != NULL)
 	{
-		if (cur->data = value)
+		if (cur->data == value)
 		{
 			return true;
 		}
@@ -185,16 +189,21 @@ bool		Set<T>::contain	( const T &value ) const
 }
 
 //==============================================================
-// operator== 
-// 
+// operator==
+// Checks if the current set is equal to another set 's'.
 //
+// Parameters:
+//   s - The set to compare with.
 //
+// Return Value:
+//   Returns 'true' if the current set is equal to set 's', 
+//   meaning they contain the same elements; otherwise, returns 'false'.
 //==============================================================
 
 template <class T>
-bool		Set<T>::operator==	( const set<T> &s )
+bool		Set<T>::operator==	( const Set<T> &s )
 {
-	if (this->cardinality != s.cardinality())
+	if (this->cardinality() != s.cardinality())
 	{
 		return false;
 	}
@@ -206,22 +215,28 @@ bool		Set<T>::operator==	( const set<T> &s )
 		{
 			return false;
 		}
-		cur=cur->next
+		cur=cur->next;
 	}	
 	return true;
 }
 
 //==============================================================
-// operator<= 
+// operator<=
+// Checks if the current set is a subset of or equal to another set 's'.
 //
+// Parameters:
+//   s - The set to compare with.
 //
-//
+// Return Value:
+//   Returns 'true' if the current set is a subset of or equal to set 's', 
+//   meaning all elements of the current set are also in 's'; otherwise, returns 'false'.
 //==============================================================
 
 template <class T>
-bool		Set<T>::operator<=	( const set<T> &s )
+template <class T>
+bool		Set<T>::operator<=	( const Set<T> &s )
 {
-	if (this->cardinality > s.cardinality())
+	if (this->cardinality() > s.cardinality())
 	{
 		return false;
 	}
@@ -233,16 +248,20 @@ bool		Set<T>::operator<=	( const set<T> &s )
 		{
 			return false;
 		}
-		cur=cur->next
+		cur=cur->next;
 	}	
 	return true;
 }
 
 //==============================================================
 // operator+
+// Performs the union operation between the current set and another set 's'.
 //
+// Parameters:
+//   s - The set to perform the union with.
 //
-//
+// Return Value:
+//   Returns a new set containing all unique elements from both the current set and 's'.
 //==============================================================
 
 template <class T>
@@ -269,10 +288,16 @@ Set<T>		Set<T>::operator+	(const Set<T> &s)
 
 //==============================================================
 // operator&
+// Performs the intersection operation between the current set and another set 's'.
 //
+// Parameters:
+//   s - The set to perform the intersection with.
 //
-//
+// Return Value:
+//   Returns a new set containing elements that are common to both the current set and 's'.
 //==============================================================
+
+template <class T>
 template <class T>
 Set<T>		Set<T>::operator&	(const Set<T> &s) 
 {
@@ -293,20 +318,25 @@ Set<T>		Set<T>::operator&	(const Set<T> &s)
 }
 
 //==============================================================
-// operator+
+// operator-
+// Performs the set difference operation between the current set and another set 's'.
 //
+// Parameters:
+//   s - The set to perform the difference with.
 //
-//
+// Return Value:
+//   Returns a new set containing elements that are in the current set but not in 's'.
 //==============================================================
+
 template <class T>
-Set<T>		Set<T>::operator-	(const Set<T> &s)
+Set<T>		Set<T>::operator-		(const Set<T> &s)
 {
     Set<T> difSet;
 
     Node* cur = head;
     while (cur != NULL) 
     {
-        if (!.contains(cur->data)) 
+        if (!s.contains(cur->data)) 
         {
             difSet.insert(cur->data);
         }
@@ -317,27 +347,28 @@ Set<T>		Set<T>::operator-	(const Set<T> &s)
 }
 //==============================================================
 // to_string
+// Converts the elements of the set into a string representation.
 //
-//
-//
+// Return Value:
+//   Returns a string containing a space-separated list of elements in the set.
 //==============================================================
-template <class T>
-string		 Set<T>::to_string	( void ) const 
-{
-    string res;
-    Node* cur = head;
 
-    while (cur != NULL) 
-    {
-        result += to_string(cur->data); 
-        if (cur->next != NULL) 
-        {
-            res += " "; 
+template<class T>
+string Set<T>::to_string() const 
+{
+    string result = "";
+    Node* current = head;
+    while (current != nullptr) {
+        result += std::to_string(current->data);
+        if (current->next != nullptr) {
+            result += " ";
         }
-        cur = cur->next;
+        current = current->next;
     }
-    return res;
+    result += "";
+    return result;
 }
+
 
 
 
