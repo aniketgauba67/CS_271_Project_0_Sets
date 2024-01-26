@@ -1,15 +1,3 @@
-1 of 8,990
-(no subject)
-Inbox
-Hoang Ngo
-	
-Attachments6:47 PM (46 minutes ago)
-	
-to me
-
- 2 Attachments  •  Scanned by Gmail
-	
-
 //========================================================
 // Set
 // Default constructor creating an empty set.
